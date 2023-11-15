@@ -9,6 +9,7 @@ pipeline {
                     checkout scm
 
                     // Build Spring Boot application
+                    sh 'chmod +x mvnw'
                     sh './mvnw clean package'
                 }
             }
