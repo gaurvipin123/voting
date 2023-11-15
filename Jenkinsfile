@@ -28,8 +28,8 @@ pipeline {
             steps {
                 script {
                     // Push Docker image to AWS ECR
-                    withDockerRegistry([url: "https://<your-account-id>.dkr.ecr.<your-region>.amazonaws.com", credentialsId: 'aws-ecr-credentials']) {
-                        sh 'docker push <your-account-id>.dkr.ecr.<your-region>.amazonaws.com/<your-repo-name>:<your-tag>'
+                    withDockerRegistry([url: "https://854267915471.dkr.ecr.ap-south-1.amazonaws.com/voting", credentialsId: 'aws-ecr-credentials']) {
+                        sh 'docker push 854267915471.dkr.ecr.ap-south-1.amazonaws.com/voting:latest'
                     }
                 }
             }
