@@ -1,37 +1,57 @@
 pipeline {
     agent any
+    
+    tools {
+        maven 'Maven' // This assumes you have configured a Maven tool named 'Maven' in Jenkins
+        jdk 'Java' // This assumes you have configured a JDK tool named 'Java' in Jenkins
+    }
 
     stages {
+        stage('Checkout') {
+            steps {
+                script {
+                    // Checkout the code from the repository
+                    checkout scm
+                }
+            }
+        }
+
         stage('Build') {
             steps {
                 script {
-                    // Checkout code from the repository
-                    checkout scm
-
-                    // Build Spring Boot application
-                    sh 'clean install package'
+                    // Build the Maven project
+                    sh 'mvn clean package'
                 }
             }
         }
 
-        stage('Build Docker Image') {
+        stage('Test') {
             steps {
                 script {
-                    // Build Docker image
-                    sh 'docker build -t voting:latest .'
+                    // Run tests (if applicable)
+                    sh 'mvn test'
                 }
             }
         }
 
-        stage('Push to ECR') {
+        stage('Deploy') {
             steps {
                 script {
-                    // Push Docker image to AWS ECR
-                    withDockerRegistry([url: "854267915471.dkr.ecr.ap-south-1.amazonaws.com/voting", credentialsId: 'aws-ecr-credentials']) {
-                        sh 'docker push 854267915471.dkr.ecr.ap-south-1.amazonaws.com/voting:latest'
-                    }
+                    // Additional deployment steps if needed
                 }
             }
+        }
+    }
+
+    post {
+        success {
+            echo 'The build was successful! Deploy your application.'
+            // Add deployment steps or notifications here
+        }
+
+        failure {
+            echo 'The build failed. Please check the logs for details.'
+            // Add failure notifications or cleanup steps here
         }
     }
 }
