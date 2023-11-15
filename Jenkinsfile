@@ -9,7 +9,7 @@ pipeline {
                     checkout scm
 
                     // Build Spring Boot application
-                    sh './mvnw clean package'
+                    sh 'clean install package'
                 }
             }
         }
