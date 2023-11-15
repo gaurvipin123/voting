@@ -4,7 +4,7 @@ pipeline {
         AWS_ACCOUNT_ID="854267915471"
         AWS_DEFAULT_REGION="ap-south-1"
         IMAGE_REPO_NAME="voting"
-        IMAGE_TAG="latest"
+        IMAGE_TAG="1.4"
         REPOSITORY_URI = "854267915471.dkr.ecr.ap-south-1.amazonaws.com/voting"
     }
 
@@ -26,7 +26,7 @@ pipeline {
             steps {
                 script {
                     // Build Docker image
-                    sh 'docker build -t springboot:1.2 .'
+                    sh 'docker build -t "${IMAGE_REPO_NAME}:${IMAGE_TAG}" .'
                 }
             }
         }
@@ -43,6 +43,7 @@ pipeline {
             steps {
                 script {
                     // Push Docker image to AWS ECR
+                     sh """docker tag ${IMAGE_REPO_NAME}:${IMAGE_TAG} ${REPOSITORY_URI}:$IMAGE_TAG"""
                      sh """docker push ${AWS_ACCOUNT_ID}.dkr.ecr.${AWS_DEFAULT_REGION}.amazonaws.com/${IMAGE_REPO_NAME}:${IMAGE_TAG}"""
                     
                 }
