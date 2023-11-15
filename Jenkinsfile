@@ -19,7 +19,7 @@ pipeline {
             steps {
                 script {
                     // Build Docker image
-                    sh 'sudo docker build -t springboot:1.2 .'
+                    sh 'docker build -t springboot:1.2 .'
                 }
             }
         }
