@@ -4,7 +4,7 @@ pipeline {
         AWS_ACCOUNT_ID="854267915471"
         AWS_DEFAULT_REGION="ap-south-1"
         IMAGE_REPO_NAME="voting"
-        IMAGE_TAG="1.4"
+        IMAGE_TAG="1.5"
         REPOSITORY_URI = "854267915471.dkr.ecr.ap-south-1.amazonaws.com/voting"
     }
 
