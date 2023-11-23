@@ -1,11 +1,11 @@
 pipeline {
     agent any
     environment {
-        AWS_ACCOUNT_ID="854267915471"
+        AWS_ACCOUNT_ID="295708546847"
         AWS_DEFAULT_REGION="ap-south-1"
         IMAGE_REPO_NAME="voting"
         IMAGE_TAG="1.5"
-        REPOSITORY_URI = "854267915471.dkr.ecr.ap-south-1.amazonaws.com/voting"
+        REPOSITORY_URI = "295708546847.dkr.ecr.ap-south-1.amazonaws.com/voting"
     }
 
     stages {
